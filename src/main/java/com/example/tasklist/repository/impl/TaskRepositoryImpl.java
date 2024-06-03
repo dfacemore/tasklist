@@ -136,7 +136,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 statement.setString(2, task.getDescription());
             }
             if(task.getExpirationData() == null) {
-                statement.setNull(3, Types.VARCHAR);
+                statement.setNull(3, Types.TIMESTAMP);
             } else {
                 statement.setTimestamp(3, Timestamp.valueOf(task.getExpirationData()));
             }

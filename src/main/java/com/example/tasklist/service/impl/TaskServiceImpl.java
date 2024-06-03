@@ -44,8 +44,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public Task create(Task task, Long userId) {
-        task.setStatus(Status.TODO);
+    public Task create(final Task task, final Long userId) {
+            task.setStatus(Status.TODO);
         taskRepository.create(task);
         taskRepository.assignToUserById(task.getId(), userId);
         return task;
