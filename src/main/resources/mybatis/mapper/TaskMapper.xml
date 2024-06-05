@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.tasklist.repository.TaskRepository">
 
     <resultMap id="TaskResultMap" type="com.example.tasklist.domain.task.Task" autoMapping="false">
@@ -13,26 +14,26 @@
     </resultMap>
 
     <select id="findById" resultMap="TaskResultMap">
-        SELECT t.id              as task_id,
-        t.title           as task_title,
-        t.description     as task_description,
+        SELECT t.id as task_id,
+        t.title as task_title,
+        t.description as task_description,
         t.expiration_date as task_expiration_date,
-        t.status          as task_status
+        t.status as task_status
         FROM tasks t
         WHERE t.id = #{id}
     </select>
-    
-    <select id="findAllByUserId" resultMap="TaskResulMap">
-        SELECT t.id              as task_id,
-        t.title           as task_title,
-        t.description     as task_description,
+
+    <select id="findAllByUserId" resultMap="TaskResultMap">
+        SELECT t.id as task_id,
+        t.title as task_title,
+        t.description as task_description,
         t.expiration_date as task_expiration_date,
-        t.status          as task_status
+        t.status as task_status
         FROM tasks t
         JOIN users_tasks ut on t.id = ut.task_id
         WHERE ut.user_id = #{userId}
     </select>
-    
+
     <insert id="assignToUserById">
         INSERT INTO users_tasks (task_id, user_id)
         VALUES (#{taskId}, #{userId})
@@ -46,6 +47,7 @@
         status = #{status}
         WHERE id = #{id}
     </update>
+
 
     <insert id="create" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         INSERT INTO tasks (title, description, expiration_date, status)

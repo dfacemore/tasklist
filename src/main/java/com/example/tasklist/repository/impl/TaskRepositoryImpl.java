@@ -111,10 +111,10 @@ public class TaskRepositoryImpl implements TaskRepository {
             } else {
                 statement.setString(2, task.getDescription());
             }
-            if(task.getExpirationData() == null) {
+            if(task.getExpirationDate() == null) {
                 statement.setNull(3, Types.VARCHAR);
             } else {
-                statement.setTimestamp(3, Timestamp.valueOf(task.getExpirationData()));
+                statement.setTimestamp(3, Timestamp.valueOf(task.getExpirationDate()));
             }
             statement.setString(4, task.getStatus().name());
             statement.setLong(5, task.getId());
@@ -135,10 +135,10 @@ public class TaskRepositoryImpl implements TaskRepository {
             } else {
                 statement.setString(2, task.getDescription());
             }
-            if(task.getExpirationData() == null) {
+            if(task.getExpirationDate() == null) {
                 statement.setNull(3, Types.TIMESTAMP);
             } else {
-                statement.setTimestamp(3, Timestamp.valueOf(task.getExpirationData()));
+                statement.setTimestamp(3, Timestamp.valueOf(task.getExpirationDate()));
             }
             statement.setString(4, task.getStatus().name());
             statement.executeUpdate();
