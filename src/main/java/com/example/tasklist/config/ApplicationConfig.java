@@ -2,6 +2,11 @@ package com.example.tasklist.config;
 
 import com.example.tasklist.web.security.JwtTokenFilter;
 import com.example.tasklist.web.security.JwtTokenProvider;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +45,27 @@ public class ApplicationConfig {
     }
 
     @Bean
+    public OpenAPI openAPI() {
+        return new OpenAPI()
+                .addSecurityItem(new SecurityRequirement()
+                        .addList("bearerAuth"))
+                .components(
+                        new Components()
+                                .addSecuritySchemes("bearerAuth",
+                                        new SecurityScheme()
+                                                .type(SecurityScheme.Type.HTTP)
+                                                .scheme("bearer")
+                                                .bearerFormat("JWT")
+                                )
+                )
+                .info(new Info()
+                        .title("Task list API")
+                        .description("Demo Spring Boot application")
+                        .version("1.0")
+                );
+    }
+
+    @Bean
     @SneakyThrows
     public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) {
         httpSecurity
@@ -51,12 +77,12 @@ public class ApplicationConfig {
                         .authenticationEntryPoint(
                             (request, response, authException) -> {
                                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                                response.getWriter().write("Unauthorized1.");
+                                response.getWriter().write("Unauthorized.");
                             })
                         .accessDeniedHandler(
                                 (request, response, accessDeniedException) -> {
                                     response.setStatus(HttpStatus.FORBIDDEN.value());
-                                    response.getWriter().write("Unauthorized2.");
+                                    response.getWriter().write("Unauthorized.");
                                 }))
                 .authorizeHttpRequests(configurer ->
                         configurer.requestMatchers("/api/v1/auth/**")

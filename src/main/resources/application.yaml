@@ -1,14 +1,18 @@
 spring:
-    datasource:
+  datasource:
       url: jdbc:postgresql://192.168.100.50:5432/tasklist?currentSchema=tasklist
       username: postgres
       password: 333
       driver-class-name: org.postgresql.Driver
-    sql:
-      init:
-        mode: always
-        continue-on-error: false
-#        data-locations: classpath:demo_data.sql
+  sql:
+    init:
+      mode: never
+      continue-on-error: false
+#      data-locations: classpath:demo_data.sql
+  liquibase:
+    change-log: classpath:liquibase/db.changelog.yaml
+    enabled: true
+    default-schema: tasklist
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
 security:
