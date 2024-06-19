@@ -1,6 +1,6 @@
 spring:
   datasource:
-      url: jdbc:postgresql://192.168.100.50:5432/tasklist?currentSchema=tasklist
+      url: jdbc:postgresql://localhost/tasklist?currentSchema=tasklist
       username: postgres
       password: 333
       driver-class-name: org.postgresql.Driver
