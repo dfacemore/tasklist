@@ -25,12 +25,11 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public String upload(
-            final TaskImage image
-    ) {
+            final TaskImage image) {
         try {
             createBucket();
         } catch (Exception e) {
-            throw new ImageUploadException("Image upload failed: "
+            throw new ImageUploadException("Image upload failed1: "
                                            + e.getMessage());
         }
         MultipartFile file = image.getFile();
@@ -42,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             inputStream = file.getInputStream();
         } catch (Exception e) {
-            throw new ImageUploadException("Image upload failed: "
+            throw new ImageUploadException("Image upload failed2: "
                                            + e.getMessage());
         }
         saveImage(inputStream, fileName);
