@@ -24,7 +24,7 @@ services:
       - minio
       - redis
     env_file:
-      - .env
+      - .env-docker
     ports:
       - '8080:8080'
 
@@ -33,10 +33,14 @@ services:
     container_name: postgres
     networks:
       - app-network
+    ports:
+      - '5432:5432'
     environment:
       - POSTGRES_USER=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DATABASE}
+    env_file:
+      - .env-docker
     volumes:
       - ./src/main/resources/db-init:/docker-entrypoint-initdb.d
       - db-data:/var/lib/postgresql/data
@@ -49,6 +53,8 @@ services:
       - app-network
     ports:
       - '6379:6379'
+    env_file:
+      - .env-docker
     command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
     volumes:
       - cache:/data
@@ -65,5 +71,7 @@ services:
     ports:
       - '9090:9090'
       - '9000:9000'
+    env_file:
+      - .env-docker
     volumes:
       - minio-data:/minio
