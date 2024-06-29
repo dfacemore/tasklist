@@ -1,8 +1,18 @@
 package com.example.tasklist.domain.task;
 
-import jakarta.persistence.*;
-import lombok.Data;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import lombok.Data;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Column;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
