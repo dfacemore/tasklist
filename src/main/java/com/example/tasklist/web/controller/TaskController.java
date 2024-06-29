@@ -31,7 +31,7 @@ public class TaskController {
     @Operation(summary = "Update task")
     @PreAuthorize("canAccessTask(#dto.id)")
     public TaskDto update(@Validated(OnUpdate.class)
-                              @RequestBody final TaskDto dto) {
+                          @RequestBody final TaskDto dto) {
         Task task = taskMapper.toEntity(dto);
         Task updatedTask = taskService.update(task);
         return taskMapper.toDto(updatedTask);
