@@ -30,7 +30,8 @@ public class CustomSecurityExpressionHandler
     }
 
     @Override
-    public void setApplicationContext(final ApplicationContext applicationContext) {
+    public void setApplicationContext(
+            final ApplicationContext applicationContext) {
         super.setApplicationContext(applicationContext);
         this.applicationContext = applicationContext;
     }
