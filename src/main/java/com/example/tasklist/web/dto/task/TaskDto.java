@@ -36,7 +36,7 @@ public class TaskDto {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime expirationData;
+    private LocalDateTime expirationDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<String> images;

@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @MutationMapping(name = "deleteUserById")
+    @MutationMapping(name = "deleteUser")
     @Operation(summary = "Delete user by id")
     @PreAuthorize("@customSecurityExpression.canAccessUser(#id)")
     public void deleteById(@PathVariable @Argument final Long id) {
