@@ -43,6 +43,7 @@ public class UserController {
     private final UserMapper userMapper;
     private final TaskMapper taskMapper;
 
+
     @PutMapping
     @MutationMapping(name = "updateUser")
     @Operation(summary = "Update user")
