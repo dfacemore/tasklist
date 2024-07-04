@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
                     condition = "#user.username!=null",
                     key = "#user.username"
             )})
-    public User create(User user) {
+    public User create(final User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
