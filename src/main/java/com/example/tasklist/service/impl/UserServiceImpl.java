@@ -61,18 +61,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     @Caching(cacheable = {
-            @Cacheable(value =
-                    "UserService::getById", key = "#user.id"),
-            @Cacheable(value =
-                    "UserService::getByUsername", key = "#user.username")
-    })
-    public User create(final User user) {
+            @Cacheable(
+                    value = "UserService::getById",
+                    condition = "#user.id!=null",
+                    key = "#user.id"
+            ),
+            @Cacheable(
+                    value = "UserService::getByUsername",
+                    condition = "#user.username!=null",
+                    key = "#user.username"
+            )})
+    public User create(User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
         if (!user.getPassword().equals(user.getPasswordConfirmation())) {
             throw new IllegalStateException(
-                    "Password and password confirmation do not match.");
+                    "Password and password confirmation do not match."
+            );
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = Set.of(Role.ROLE_USER);
