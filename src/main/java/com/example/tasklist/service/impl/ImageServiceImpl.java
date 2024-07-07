@@ -24,13 +24,12 @@ public class ImageServiceImpl implements ImageService {
     private final MinioProperties minioProperties;
 
     @Override
-    public String upload(
-            final TaskImage image) {
+    public String upload(final TaskImage image) {
         try {
             createBucket();
         } catch (Exception e) {
-            throw new ImageUploadException("Image upload failed1: "
-                                           + e.getMessage());
+            throw new ImageUploadException(
+                    "Image upload failed: " + e.getMessage());
         }
         MultipartFile file = image.getFile();
         if (file.isEmpty() || file.getOriginalFilename() == null) {
@@ -41,7 +40,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             inputStream = file.getInputStream();
         } catch (Exception e) {
-            throw new ImageUploadException("Image upload failed2: "
+            throw new ImageUploadException("Image upload failed: "
                                            + e.getMessage());
         }
         saveImage(inputStream, fileName);
